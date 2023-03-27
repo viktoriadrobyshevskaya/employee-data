@@ -1,7 +1,6 @@
 package com.innowise.employeedata.configuration;
 
-import com.innowise.employeedata.dto.EmployeeDto;
-import lombok.AllArgsConstructor;
+import com.innowise.employeedata.entity.Employee;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,21 +14,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeUserDetails implements UserDetails {
 
-    private final EmployeeDto employeeDto;
+    private final Employee employee;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(employeeDto.getRole().name()));
+        return Collections.singletonList(new SimpleGrantedAuthority(employee.getRole().name()));
     }
 
     @Override
     public String getUsername() {
-        return employeeDto.getEmail();
+        return employee.getEmail();
     }
 
     @Override
     public String getPassword() {
-        return employeeDto.getPassword();
+        return employee.getPassword();
     }
 
     @Override

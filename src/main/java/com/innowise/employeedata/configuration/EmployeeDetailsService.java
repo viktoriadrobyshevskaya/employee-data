@@ -19,7 +19,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EmployeeDetailsService implements UserDetailsService {
     private final EmployeeRepository repository;
-    private final EmployeeMapper employeeMapper;
 
     @Override
     public EmployeeUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -29,6 +28,6 @@ public class EmployeeDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Could not find user");
         }
 
-        return new EmployeeUserDetails(employeeMapper.mapToDto(employee.get()));
+        return new EmployeeUserDetails(employee.get());
     }
 }
