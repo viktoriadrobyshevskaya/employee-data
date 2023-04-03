@@ -16,4 +16,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("EmployeeException: {}", employeeException.getMessage(), employeeException);
         return ResponseEntity.badRequest().body(employeeException.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception exception) {
+        log.error("Unexpected exception: {}", exception.getMessage(), exception);
+        return ResponseEntity.internalServerError().body("Unexpected exception");
+    }
 }
